@@ -1,4 +1,5 @@
 using BlogAPI.Data;
+using BlogAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,11 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDB"));
 });
+
+builder.Services.AddAutoMapper(typeof(Program));
+
+// Life cycle DI
+builder.Services.AddScoped<ICategory, CategoryService>();
 
 // Add CORS
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => 
