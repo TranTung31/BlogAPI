@@ -21,6 +21,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 // Life cycle DI
 builder.Services.AddScoped<ICategory, CategoryService>();
 builder.Services.AddScoped<IAuthor, AuthorService>();
+builder.Services.AddScoped<IBlog, BlogService>();
 
 // Add CORS
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => 

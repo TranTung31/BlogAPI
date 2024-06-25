@@ -10,6 +10,8 @@ namespace BlogAPI.Helpers
         {
             CreateMap<Category, CategoryModel>().ReverseMap();
             CreateMap<Author, AuthorModel>().ReverseMap();
+            CreateMap<Blog, BlogModel>().ReverseMap();
+            CreateMap<Blog, BlogRequest>().ReverseMap();
         }
     }
 }
