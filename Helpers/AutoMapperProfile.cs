@@ -9,6 +9,7 @@ namespace BlogAPI.Helpers
         public AutoMapperProfile()
         {
             CreateMap<Category, CategoryModel>().ReverseMap();
+            CreateMap<Author, AuthorModel>().ReverseMap();
         }
     }
 }
