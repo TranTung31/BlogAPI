@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BlogAPI.Data;
+using BlogAPI.Helpers;
 using BlogAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,9 @@ namespace BlogAPI.Services
             {
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
+            } else
+            {
+                throw new AppException("Category with Id {0} not found!", id);
             }
         }
 
@@ -43,6 +47,10 @@ namespace BlogAPI.Services
         public async Task<CategoryModel> GetCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                throw new AppException("Category with Id {0} not found!", id);
+            }
             return _mapper.Map<CategoryModel>(category);
         }
 
@@ -50,9 +58,20 @@ namespace BlogAPI.Services
         {
             if (id == model.Id)
             {
-                var category = _mapper.Map<Category>(model);
-                _context.Categories.Update(category);
-                await _context.SaveChangesAsync();
+                var category = await _context.Categories.FindAsync(id);
+                if (category != null)
+                {
+                    category.Name = model.Name;
+                    category.Description = model.Description;
+                    _context.Categories.Update(category);
+                    await _context.SaveChangesAsync();
+                } else
+                {
+                    throw new AppException("Category with Id {0} not found!", id);
+                }
+            } else
+            {
+                throw new AppException("Ids doesn't match!");
             }
         }
     }

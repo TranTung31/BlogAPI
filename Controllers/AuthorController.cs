@@ -1,4 +1,5 @@
-﻿using BlogAPI.Models;
+﻿using BlogAPI.Helpers;
+using BlogAPI.Models;
 using BlogAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace BlogAPI.Controllers
                 var authors = await _author.GetAllAuthors();
                 return Ok(authors);
             }
-            catch
+            catch (AppException ex)
             {
                 return BadRequest();
             }
@@ -36,17 +37,11 @@ namespace BlogAPI.Controllers
             try
             {
                 var author = await _author.GetAuthor(id);
-
-                if (author == null)
-                {
-                    return NotFound();
-                }
-
                 return Ok(author);
             }
-            catch
+            catch (AppException ex)
             {
-                return BadRequest();
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -70,16 +65,12 @@ namespace BlogAPI.Controllers
         {
             try
             {
-                if (id != model.Id)
-                {
-                    return BadRequest();
-                }
                 await _author.UpdateAuthor(id, model);
                 return Ok();
             }
-            catch
+            catch (AppException ex)
             {
-                return BadRequest();
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -91,9 +82,9 @@ namespace BlogAPI.Controllers
                 await _author.DeleteAuthor(id);
                 return Ok();
             }
-            catch
+            catch (AppException ex) 
             {
-                return BadRequest();
+                return BadRequest(new { message = ex.Message });
             }
         }
     }
