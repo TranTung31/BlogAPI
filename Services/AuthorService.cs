@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BlogAPI.Data;
+using BlogAPI.Helpers;
 using BlogAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,9 @@ namespace BlogAPI.Services
             {
                 _context.Authors.Remove(author);
                 await _context.SaveChangesAsync();
+            } else
+            {
+                throw new AppException("Author with Id {0} not found!", id);
             }
         }
 
@@ -43,6 +47,10 @@ namespace BlogAPI.Services
         public async Task<AuthorModel> GetAuthor(int id)
         {
             var author = await _context.Authors.FindAsync(id);
+            if (author == null)
+            {
+                throw new AppException("Author with Id {0} not found!", id);
+            }
             return _mapper.Map<AuthorModel>(author);
         }
 
@@ -57,7 +65,13 @@ namespace BlogAPI.Services
                     author.Description = model.Description;
                     _context.Authors.Update(author);
                     await _context.SaveChangesAsync();
+                } else
+                {
+                    throw new AppException("Author with Id {0} not found!", id);
                 }
+            } else
+            {
+                throw new AppException("Id doesn't match!");
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using BlogAPI.Models;
+﻿using BlogAPI.Helpers;
+using BlogAPI.Models;
 using BlogAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,14 +33,14 @@ namespace BlogAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {
-            var category = await _category.GetCategory(id);
-            if (category == null)
+            try
             {
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-            else
-            {
+                var category = await _category.GetCategory(id);
                 return StatusCode(StatusCodes.Status200OK, category);
+            }
+            catch (AppException ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { message = ex.Message });
             }
         }
 
@@ -63,16 +64,12 @@ namespace BlogAPI.Controllers
         {
             try
             {
-                if (id != model.Id)
-                {
-                    return StatusCode(StatusCodes.Status400BadRequest);
-                }
                 await _category.UpdateCategory(id, model);
                 return StatusCode(StatusCodes.Status200OK);
             }
-            catch
+            catch (AppException ex)
             {
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new { message = ex.Message });
             }
         }
 
@@ -84,9 +81,9 @@ namespace BlogAPI.Controllers
                 await _category.DeleteCategory(id);
                 return StatusCode(StatusCodes.Status200OK);
             }
-            catch
+            catch (AppException ex)
             {
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new { message = ex.Message });
             }
         }
     }
