@@ -81,9 +81,9 @@ namespace BlogAPI.Infrastructure.Repositories
             return await _dbContext.RefreshTokens.FirstOrDefaultAsync(x => x.Token.Equals(refreshToken.Trim()));
         }
 
-        public async Task<AspNetUser?> FindUserByIdAsync(string userId)
+        public async Task<AspNetUser?> FindUserByIdAsync(int userId)
         {
-            return await _userManager.FindByIdAsync(userId);
+            return await _userManager.FindByIdAsync(userId.ToString());
         }
     }
 }

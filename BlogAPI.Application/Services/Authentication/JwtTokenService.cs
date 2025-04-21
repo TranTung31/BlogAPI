@@ -37,7 +37,7 @@ namespace BlogAPI.Application.Services.Authentication
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName ?? ""),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email ?? ""),
-                new Claim("uid", user.Id),
+                new Claim("uid", user.Id.ToString()),
             };
             var tokenDescriptor = new SecurityTokenDescriptor
             {
