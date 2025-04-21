@@ -19,7 +19,7 @@ namespace BlogAPI.Core.Entities
 
         [Required]
         [ForeignKey(nameof(AspNetUser))]
-        public required string UserId { get; set; }
+        public required int UserId { get; set; }
 
         [Required]
         public DateTime ExpiresAt { get; set; }

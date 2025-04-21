@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogAPI.Core.Entities
 {
-    public class AspNetUser : IdentityUser
+    public class AspNetUser : IdentityUser<int>
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

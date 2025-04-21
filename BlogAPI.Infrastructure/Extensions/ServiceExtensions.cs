@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace BlogAPI.Infrastructure.Extensions
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 
-            services.AddIdentity<AspNetUser, IdentityRole>(options =>
+            services.AddIdentity<AspNetUser, AspNetRole>(options =>
             {
                 options.Password.RequiredLength = 8;
                 options.Password.RequireDigit = true;
@@ -72,6 +73,15 @@ namespace BlogAPI.Infrastructure.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"] ?? ""))
                 };
+
+                o.Events = new JwtBearerEvents
+                 {
+                     OnAuthenticationFailed = context =>
+                     {
+                         context.Response.StatusCode = 403;
+                         return Task.CompletedTask;
+                     }
+                 };
             });
 
             return services;

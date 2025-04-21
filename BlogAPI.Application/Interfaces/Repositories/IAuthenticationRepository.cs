@@ -13,7 +13,7 @@ namespace BlogAPI.Application.Interfaces.Repositories
     {
         Task<AspNetUser?> FindUserByEmailAsync(string email);
         Task<AspNetUser?> FindUserByNameAsync(string userName);
-        Task<AspNetUser?> FindUserByIdAsync(string userName);
+        Task<AspNetUser?> FindUserByIdAsync(int userId);
         Task<bool> CheckUserPasswordAsync(AspNetUser user, string password);
         Task<IList<string>> GetUserRolesAsync(AspNetUser user);
         Task<IdentityResult> CreateUserAsync(AspNetUser user, string password);
