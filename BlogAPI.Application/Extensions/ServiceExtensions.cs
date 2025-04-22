@@ -1,4 +1,6 @@
-﻿using BlogAPI.Application.Interfaces.Services;
+﻿using BlogAPI.Application.Interfaces.Repositories;
+using BlogAPI.Application.Interfaces.Services;
+using BlogAPI.Application.Services;
 using BlogAPI.Application.Services.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +17,7 @@ namespace BlogAPI.Application.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+            services.AddScoped<IMenuService, MenuService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

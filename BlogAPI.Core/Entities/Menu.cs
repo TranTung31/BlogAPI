@@ -18,7 +18,7 @@ namespace BlogAPI.Core.Entities
         [Required]
         public required string Path { get; set; }
 
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public Menu? Parent { get; set; }
 
         public string? Icon { get; set; }

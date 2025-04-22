@@ -36,6 +36,7 @@ namespace BlogAPI.Infrastructure.Extensions
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
 
             services.AddIdentity<AspNetUser, AspNetRole>(options =>
             {
