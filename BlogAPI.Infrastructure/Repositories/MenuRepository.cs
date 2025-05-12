@@ -34,7 +34,7 @@ namespace BlogAPI.Infrastructure.Repositories
 
         public async Task<List<Menu>> GetLstMenuAsync()
         {
-            return await _dbContext.Menus.OrderBy(x => x.SortOrder).ToListAsync();
+            return await _dbContext.Menus.Include(x => x.Permissions).OrderBy(x => x.SortOrder).ToListAsync();
         }
 
         public async Task<Menu?> GetMenuByIdAsync(int menuId)
