@@ -1,4 +1,5 @@
-﻿using BlogAPI.Core.Entities;
+﻿using BlogAPI.Application.DTOs.Permission;
+using BlogAPI.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,6 @@ namespace BlogAPI.Application.DTOs.Menu
         public bool IsShow { get; set; } = true;
         public string Code { get; set; } = string.Empty;
         public List<MenuResponseDto> Childrens { get; set; } = new List<MenuResponseDto>();
-        //public ICollection<Permission> Permissions { get; set; } = new List<Permission>();
+        public List<PermissionResponseDto> Permissions { get; set; } = new List<PermissionResponseDto>();
     }
 }
