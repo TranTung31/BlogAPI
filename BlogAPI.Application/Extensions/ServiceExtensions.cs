@@ -19,6 +19,8 @@ namespace BlogAPI.Application.Extensions
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionService, PermissionService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IRolePermissionService, RolePermissionService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
