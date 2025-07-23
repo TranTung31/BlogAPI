@@ -15,6 +15,7 @@ namespace BlogAPI.Application.Interfaces.Services
         Task<BaseResponse<bool>> UpdateMenu(int menuId, MenuRequestDto menuRequestDto);
         Task<BaseResponse<bool>> DeleteMenu(int menuId);
         Task<BaseResponse<List<MenuResponseDto>>> GetLstMenu();
+        Task<BaseResponse<List<MenuSelectResponseDto>>> GetLstMenuSelect();
         Task<BaseResponse<PaginationResponse<MenuResponseDto>>> GetPagingMenu(PaginationRequest paginationRequest);
         Task<BaseResponse<MenuResponseDto>> GetMenuById(int menuId);
     }

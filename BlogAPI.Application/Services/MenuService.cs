@@ -78,6 +78,26 @@ namespace BlogAPI.Application.Services
             }
         }
 
+        public async Task<BaseResponse<List<MenuSelectResponseDto>>> GetLstMenuSelect()
+        {
+            try
+            {
+                var lstMenu = new List<MenuSelectResponseDto>();
+                var lstMenuEntity = await _menuRepository.GetLstMenuSelectAsync();
+
+                foreach (var item in lstMenuEntity)
+                {
+                    lstMenu.Add(_mapper.Map<MenuSelectResponseDto>(item));
+                }
+
+                return lstMenu.ToResponse("Lấy danh sách menu thành công!");
+            }
+            catch (Exception ex)
+            {
+                return ($"Lấy danh sách menu thất bại! (Lỗi {ex.Message})").ToErrorResponse<List<MenuSelectResponseDto>>();
+            }
+        }
+
         public async Task<BaseResponse<MenuResponseDto>> GetMenuById(int menuId)
         {
             try

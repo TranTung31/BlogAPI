@@ -12,6 +12,7 @@ namespace BlogAPI.Application.Interfaces.Repositories
     {
         Task<PaginationResponse<Menu>> GetPagingMenuAsync(PaginationRequest paginationRequest);
         Task<List<Menu>> GetLstMenuAsync();
+        Task<List<Menu>> GetLstMenuSelectAsync();
         Task<Menu?> GetMenuByIdAsync(int menuId);
         Task CreateMenuAsync(Menu menu);
         Task UpdateMenuAsync(Menu menu);
