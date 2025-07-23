@@ -15,6 +15,7 @@ namespace BlogAPI.Application.Mappings
         {
             CreateMap<Menu, MenuRequestDto>().ReverseMap();
             CreateMap<Menu, MenuResponseDto>().ReverseMap();
+            CreateMap<Menu, MenuSelectResponseDto>().ReverseMap();
         }
     }
 }

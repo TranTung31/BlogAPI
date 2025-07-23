@@ -13,7 +13,7 @@ namespace BlogAPI.Application.DTOs.Menu
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Path { get; set; } = string.Empty;
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public string? Icon { get; set; }
         public int SortOrder { get; set; }
         public bool IsShow { get; set; } = true;
